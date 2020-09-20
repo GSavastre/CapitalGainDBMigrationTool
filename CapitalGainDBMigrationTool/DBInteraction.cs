@@ -29,10 +29,10 @@ namespace CapitalGainDBMigrationTool
 
             //acquisizione del database "capitalgain"
             try {
-                Console.WriteLine("Acquisendo database : capitalgain ...");
+                Console.WriteLine("Acquisendo database ...");
                 db = client.GetDatabase("capitalgain");
 
-                Console.WriteLine(" - OK");
+                Console.WriteLine(db.DatabaseNamespace + " - OK\n");
             }
             catch (Exception e) {
                 Console.WriteLine("Acquisizione database fallita. " + e.Message);

@@ -8,9 +8,9 @@ namespace CapitalGainDBMigrationTool
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            DBInteraction.Connect();
 
             #region testing
-            DBInteraction.Connect();
 
             List<Utente> utenti = DBInteraction.GetAllUsers();
             Console.WriteLine("Utenti trovati : " + utenti.Count);
