@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Configuration;
+using System.Linq;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Linq;
 
 namespace CapitalGainDBMigrationTool
 {
     static class DBInteraction
     {
         private static MongoClient client;
-        private static string connectionString = "mongodb+srv://default:default@cluster0.foggv.azure.mongodb.net/capitalgain";
+        private static string connectionString = ConfigurationManager.ConnectionStrings["MongoDB"].ConnectionString;
         private static IMongoDatabase db;
 
         public static void Connect() {
-            
+
             //connessione al cluster atlas
             try {
                 Console.WriteLine("DBInteraction - tentativo di connessione ...");
