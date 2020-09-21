@@ -43,6 +43,5 @@ namespace CapitalGainDBMigrationTool.TableItems {
             this.gridVisibility = gridVisibility;
             this.shortDescription = shortDescription;
         }
-
     }
 }
