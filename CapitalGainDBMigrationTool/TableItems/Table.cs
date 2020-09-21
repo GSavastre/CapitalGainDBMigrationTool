@@ -9,9 +9,14 @@ namespace CapitalGainDBMigrationTool.TableItems {
         public string name { get; set; }
         public string description { get; set; }
 
-        List<TableItem> items = new List<TableItem>();
+        public List<TableItem> items = new List<TableItem>();
 
         public Table() { }
+        
+        //used for testing
+        public Table(string name) {
+            this.name = name;
+        }
 
         public void AddItem(TableItem newItem) {
             items.Add(newItem);
