@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CapitalGainDBMigrationTool": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
