@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
 namespace CapitalGainDBMigrationTool.TableItems {
     class Table {
 
@@ -12,6 +10,12 @@ namespace CapitalGainDBMigrationTool.TableItems {
         List<TableItem> items = new List<TableItem>();
 
         public Table() { }
+
+        public Table(string id, string name, string description) {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+        }
 
         public void AddItem(TableItem newItem) {
             items.Add(newItem);
@@ -32,6 +36,10 @@ namespace CapitalGainDBMigrationTool.TableItems {
                         link, mandatoryInMap,
                         searchCriteria, gridVisibility,
                         shortDescription));
+        }
+
+        public void AddItem(string[] item) {
+            items.Add(new TableItem(item));
         }
     }
 }

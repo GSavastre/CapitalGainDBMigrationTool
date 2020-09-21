@@ -15,7 +15,8 @@ namespace CapitalGainDBMigrationTool
             int sheet = 1;
 
             ExcelReader reader = new ExcelReader(path, sheet);
-            reader.DisplayFile();
+            //reader.DisplayFile();
+            reader.ReadFile();
             reader.CloseFile();
         }
     }
