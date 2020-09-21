@@ -13,6 +13,9 @@ namespace CapitalGainDBMigrationTool
         private static string connectionString = ConfigurationManager.ConnectionStrings["MongoDB"].ConnectionString;
         private static IMongoDatabase db;
 
+        /// <summary>
+        /// Connects to a predefined database.
+        /// </summary>
         public static void Connect() {
 
             //connessione al cluster atlas
@@ -39,10 +42,39 @@ namespace CapitalGainDBMigrationTool
             }
         }
 
+        /// <summary>
+        /// Gets all the users from the "utente" collection.
+        /// </summary>
+        /// <returns>
+        /// Returns a List<Utente>.
+        /// </returns>
         public static List<Utente> GetAllUsers() {
 
             var collectionUtenti = db.GetCollection<Utente>("utente");
             return collectionUtenti.Find(new BsonDocument()).ToList();
+        }
+
+        /// <summary>
+        /// Adds user to the "utente" collection.
+        /// </summary>
+        /// <param name="_user"></param>
+        /// <returns></returns>
+        public static bool AddUser(Utente _user) {
+
+            try {
+                var _doc = _user.ToBsonDocument();
+                var _collection = db.GetCollection<BsonDocument>("utente");
+
+                _collection.InsertOneAsync(_doc);
+
+                Console.WriteLine("Aggiunto utente : " + _user.userId);
+            }
+            catch (Exception e) {
+                Console.WriteLine("Impossibile aggiungere utente ..." + e.Message);
+                return false;
+            }
+
+            return true;
         }
 
     }

@@ -20,7 +20,11 @@ namespace CapitalGainDBMigrationTool
                 Console.WriteLine(u.userId);
             }
 
-            #endregion 
+            Utente utente = new Utente("user2");
+            if (!DBInteraction.AddUser(utente))
+                Console.WriteLine("Utente NON aggiunto");
+
+            #endregion
 
         }
     }
