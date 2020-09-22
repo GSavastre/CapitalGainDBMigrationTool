@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace CapitalGainDBMigrationTool.TableItems {
+namespace CapitalGainDBMigrationTool.TableClasses {
     class Table {
 
         public string id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
 
-        public List<TableItem> items = new List<TableItem>();
+        public List<TableAttribute> attributes = new List<TableAttribute>();
 
         public Table() { }
         
@@ -22,11 +22,11 @@ namespace CapitalGainDBMigrationTool.TableItems {
             this.description = description;
         }
 
-        public void AddItem(TableItem newItem) {
-            items.Add(newItem);
+        public void AddAttribute(TableAttribute newAttribute) {
+            attributes.Add(newAttribute);
         }
 
-        public void AddItem(string name, string type,
+        public void AddAttribute(string name, string type,
                         double size, char of,
                         string constraints, string description,
                         string domain, string comment,
@@ -34,7 +34,7 @@ namespace CapitalGainDBMigrationTool.TableItems {
                         string searchCriteria, string gridVisibility,
                         string shortDescription) {
 
-            items.Add(new TableItem(name, type,
+            attributes.Add(new TableAttribute(name, type,
                         size, of,
                         constraints, description,
                         domain, comment,
@@ -43,8 +43,8 @@ namespace CapitalGainDBMigrationTool.TableItems {
                         shortDescription));
         }
 
-        public void AddItem(string[] item) {
-            items.Add(new TableItem(item));
+        public void AddAttribute(string[] attribute) {
+            attributes.Add(new TableAttribute(attribute));
         }
     }
 }

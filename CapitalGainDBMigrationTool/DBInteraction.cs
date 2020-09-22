@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using CapitalGainDBMigrationTool.TableItems;
+using CapitalGainDBMigrationTool.TableClasses;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
@@ -131,8 +131,6 @@ namespace CapitalGainDBMigrationTool
             }
             return true;
         }
-
-
 
         /// <summary>
         /// Gets all the users from the "utente" collection.

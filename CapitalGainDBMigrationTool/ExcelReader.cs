@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Office.Interop.Excel;
-using CapitalGainDBMigrationTool.TableItems;
+using CapitalGainDBMigrationTool.TableClasses;
 using Range = Microsoft.Office.Interop.Excel.Range;
 using System.Runtime.CompilerServices;
 using Microsoft.VisualBasic.CompilerServices;
@@ -34,86 +34,103 @@ namespace CapitalGainDBMigrationTool
             cols = excelRange.Columns.Count;
         }
 
-        public void DisplayFile() {
-            for(int i = 1; i <= rows; i++) {
+        /// <summary>
+        /// Display the excel file on console
+        /// </summary>
+        /// <param name="limitRows">The amount of rows to display, if equals to -1 display all rows</param>
+        public void DisplayFile(int limitRows = -1) {
+            if(limitRows == -1) {
+                limitRows = rows;
+            }
+
+            //Iterate the rows
+            for (int i = 1; i <= limitRows; i++) {
+                //Display the row number
                 Console.Write($"{i} ");
                 for(int j = 1; j <= cols; j++) {
+                    //Cast the col number to a char, eg : "A1,B1"
                     char columnID = (char)(j + 'A' - 1);
-                    if (excelSheet.Range[$"{((char)(j + 'A' - 1))}{i}"].Value != null) {
-                        Console.Write($"{excelSheet.Range[$"{columnID}{i}"].Value.ToString()} ");
+                    if (excelSheet.Range[$"{((char)(j + 'A' - 1))}{i}"].Value != null && i!= 2) {
+                        Console.Write($"{excelSheet.Range[$"{columnID}{i}"].Value.ToString()} | ");
+                    } else {
+                        Console.Write("".PadRight(10, '-'));
                     }
                 }
-                Console.WriteLine("");
+                //End of row
+                Console.WriteLine("\n".PadRight(40, '_'));
             }
         }
 
         //Ugliest thing I have ever written in my life smh
-        public List<Table> ReadFile() {
+        /// <summary>
+        /// Read an excel file and parse its contents to a list of tables
+        /// </summary>
+        /// <param name="limitRows">The amount of rows to read, if equals to -1 read all rows</param>
+        /// <returns></returns>
+        public List<Table> ReadFile(int limitRows = -1) {
             List<Table> tables = new List<Table>();
             Table table = null;
-            TableItem item = new TableItem();
-            string tableId = "";
-            string tableName = "";
-            string tableDescription = "";
-            for (int i = 1; i <= rows; i++) {
+            TableAttribute attribute = new TableAttribute();
+            string tableId, tableName, tableDescription = "";
+
+            if(limitRows == -1) {
+                limitRows = rows;
+            }
+            for (int i = 1; i <= limitRows; i++) {
                 
+                //All tables in the excel file use an 18 font size, this is the only common attribute to distinguish a table from a table attribute
                 if((double)excelSheet.Range[$"A{i}"].Font.Size == tableFontSize && excelSheet.Range[$"A{i}"].Value != null) {
+                    //Add the previously read table, on first iteration table will be null
                     if(table != null) {
                         tables.Add(table);
                         table = null;
                     }
 
-                    tableId = excelSheet.Range[$"A{i}"].Value.ToString();
-                    tableName = excelSheet.Range[$"B{i}"].Value.ToString();
-                    tableDescription = excelSheet.Range[$"G{i}"].Value.ToString();
-                    table = new Table(tableId, tableName, tableDescription);
-                    //Skip to next row where table items start
+                    //All tables info is on the column A,B and G so it's fixed
+                    try {
+                        tableId = excelSheet.Range[$"A{i}"].Value.ToString();
+                        tableName = excelSheet.Range[$"B{i}"].Value.ToString();
+                        tableDescription = excelSheet.Range[$"G{i}"].Value.ToString();
+                        table = new Table(tableId, tableName, tableDescription);
+                    } catch(Exception e) {
+                        Console.WriteLine($"Errore nella lettura di una tabella riga: {i} del file");
+                        Console.WriteLine($"Messaggio errore:{e.Message}");
+                    }
+                    //Skip to next row where table attributes start
                     i++;
                     
+                    //TODO: Understand what cluster is, it's not a column of the table so I skipped it
                     while (excelSheet.Range[$"A{i}"].Value != null && excelSheet.Range[$"A{i}"].Value.ToString() != "CLUSTER") {
-                        #region old code
-
-                        /*item.name = (excelSheet.Range[$"A{i}"].Value ?? "").ToString();
-                        item.type = (excelSheet.Range[$"B{i}"].Value ?? "").ToString();
-                        if (excelSheet.Range[$"C{i}"].Value.ToString() == null || string.IsNullOrEmpty(excelSheet.Range[$"C{i}"].Value.ToString())) {
-                            item.size = -1;
-                        } else {
-                            item.size = Convert.ToDouble(excelSheet.Range[$"C{i}"].Value.ToString());
+                        //Get the entire row and cast it to an array of strings
+                        try {
+                            Range range = (Range)excelSheet.Range[excelSheet.Cells[i, 1], excelSheet.Cells[i, cols]];
+                            object[,] holder = (object[,])range.Value2;
+                            string[] stringValue = new string[cols];
+                            for(int n = 1; n <= cols; n++) {
+                                if(holder[1, n] == null) {
+                                    stringValue[n - 1] = "";
+                                } else {
+                                    stringValue[n - 1] = holder[1, n].ToString();
+                                }
+                            
+                            }
+                            table.AddAttribute(new TableAttribute(stringValue));
+                        }catch(Exception e) {
+                            Console.WriteLine($"Errore nella lettura dei dati della tabella: ${table.name} in riga: ${i}");
+                            Console.WriteLine($"Messaggio errore: ${e.Message}");
                         }
                         
-                        item.of = Convert.ToChar(excelSheet.Range[$"D{i}"].Value ?? ' ');
-                        item.constraints = (excelSheet.Range[$"E{i}"].Value ?? "").ToString();
-                        item.description = (excelSheet.Range[$"F{i}"].Value ?? "").ToString();
-                        item.domain = (excelSheet.Range[$"G{i}"].Value ?? "").ToString();
-                        item.comment = (excelSheet.Range[$"H{i}"].Value ?? "").ToString();
-                        item.link = (excelSheet.Range[$"I{i}"].Value ?? "").ToString();
-                        item.mandatoryInMap = (excelSheet.Range[$"J{i}"].Value ?? "").ToString();
-                        item.searchCriteria = (excelSheet.Range[$"K{i}"].Value ?? "").ToString();
-                        item.gridVisibility = (excelSheet.Range[$"L{i}"].Value ?? "").ToString();
-                        item.shortDescription = (excelSheet.Range[$"M{i}"].Value ?? "").ToString();
-                        table.AddItem(item);*/
-                        //table.AddItem(excelSheet.Range[excelSheet.Cells[i,1],excelSheet.Cells[i,cols]]);
-                        #endregion
-                        Range range = (Range)excelSheet.Range[excelSheet.Cells[i, 1], excelSheet.Cells[i, cols]];
-                        object[,] holder = (object[,])range.Value2;
-                        string[] stringValue = new string[cols];
-                        for(int n = 1; n <= cols; n++) {
-                            if(holder[1, n] == null) {
-                                stringValue[n - 1] = "";
-                            } else {
-                                stringValue[n - 1] = holder[1, n].ToString();
-                            }
-                            
-                        }
-                        table.AddItem(new TableItem(stringValue));
                         i++;
                     }
                 }
             }
+            //Add the last table that was read, since it's out of the loop it can not add the last table which was placed at the start of the loop when a new table was read
             tables.Add(table);
             return tables;
         }
-
+        /// <summary>
+        /// Close up the file and free up the memory 
+        /// </summary>
         public void CloseFile() {
             excel.Quit();
             System.Runtime.InteropServices.Marshal.ReleaseComObject(excel);
