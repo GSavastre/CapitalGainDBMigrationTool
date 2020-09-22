@@ -27,7 +27,7 @@ namespace CapitalGainDBMigrationTool
             //if (DBInteraction.Connect())
             //{
             //    Table t = new Table("testCollection");
-            //    DBInteraction.CreateCollection(t.name);
+            //    DBInteraction.CreateCollection(t);
             //}
 
             #endregion

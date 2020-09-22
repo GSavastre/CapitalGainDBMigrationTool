@@ -132,8 +132,6 @@ namespace CapitalGainDBMigrationTool
             return true;
         }
 
-
-
         /// <summary>
         /// Gets all the users from the "utente" collection.
         /// </summary>
