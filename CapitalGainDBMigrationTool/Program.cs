@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using CapitalGainDBMigrationTool.TableItems;
+using CapitalGainDBMigrationTool.TableClasses;
 using Microsoft.Office.Interop.Excel;
 using MongoDB.Bson;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -13,13 +13,13 @@ namespace CapitalGainDBMigrationTool
     {
         static void Main(string[] args) {
 
-            //TODO: Change this to a var
-            string path = ConfigurationManager.AppSettings["D"];
+            
+            string path = ConfigurationManager.AppSettings["S"];
             int sheet = 1;
 
             ExcelReader reader = new ExcelReader(path, sheet);
-            //reader.DisplayFile();
-            reader.ReadFile();
+            reader.DisplayFile(20);
+            //List<Table> tables = reader.ReadFile();
             reader.CloseFile();
 
             #region testing collection creation

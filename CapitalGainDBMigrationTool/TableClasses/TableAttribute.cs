@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace CapitalGainDBMigrationTool.TableItems {
-    //TODO: Add constraints on attributes on items to insure that they are not null
-    class TableItem {
+namespace CapitalGainDBMigrationTool.TableClasses {
+    //TODO: Add constraints on attributes on attributes to insure that they are not null
+    class TableAttribute {
         public string name { get; set; }
         public string type { get; set; }
         public double size { get; set; }
@@ -17,9 +17,9 @@ namespace CapitalGainDBMigrationTool.TableItems {
         public string gridVisibility { get; set; }
         public string shortDescription { get; set; }
 
-        public TableItem() { }
+        public TableAttribute() { }
 
-        public TableItem(string name="", string type="", 
+        public TableAttribute(string name="", string type="", 
                         double size = 0, char of = ' ', 
                         string constraints="", string description="", 
                         string domain="", string comment="", 
@@ -41,32 +41,32 @@ namespace CapitalGainDBMigrationTool.TableItems {
             this.shortDescription = shortDescription;
         }
 
-        public TableItem(string[] items) {
-            this.name = items[0];
-            this.type = items[1];
-            if (string.IsNullOrWhiteSpace(items[2])) {
+        public TableAttribute(string[] attributes) {
+            this.name = attributes[0];
+            this.type = attributes[1];
+            if (string.IsNullOrWhiteSpace(attributes[2])) {
                 this.size = -1;
-            } else if (items[2] == "MAX") {
+            } else if (attributes[2] == "MAX") {
                 this.size = 999999;
             } else {
-                this.size = Convert.ToDouble(items[2]);
+                this.size = Convert.ToDouble(attributes[2]);
             }
 
-            if (string.IsNullOrEmpty(items[3])) {
+            if (string.IsNullOrEmpty(attributes[3])) {
                 this.of = ' ';
             } else {
-                this.of = Convert.ToChar(items[3]);
+                this.of = Convert.ToChar(attributes[3]);
             }
 
-            this.constraints = items[4];
-            this.description = items[5];
-            this.domain = items[6];
-            this.comment = items[7];
-            this.link = items[8];
-            this.mandatoryInMap = items[9];
-            this.searchCriteria = items[10];
-            this.gridVisibility = items[11];
-            this.shortDescription = items[12];
+            this.constraints = attributes[4];
+            this.description = attributes[5];
+            this.domain = attributes[6];
+            this.comment = attributes[7];
+            this.link = attributes[8];
+            this.mandatoryInMap = attributes[9];
+            this.searchCriteria = attributes[10];
+            this.gridVisibility = attributes[11];
+            this.shortDescription = attributes[12];
         }
 
     }
