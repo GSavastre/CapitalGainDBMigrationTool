@@ -76,7 +76,7 @@ namespace CapitalGainDBMigrationTool
             try
             {
                 foreach (Table _t in _tables) {
-                    db.CreateCollection(_t.name);
+                    db.CreateCollection(_t.id);
                     Console.WriteLine("Collection creata : " + _t.name);
                 }
             }
