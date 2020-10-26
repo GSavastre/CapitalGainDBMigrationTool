@@ -1,6 +1,4 @@
 ﻿using System;
-<<<<<<< Updated upstream
-=======
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
@@ -15,17 +13,10 @@ using MongoDB.Bson.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 using Menu = CapitalGainDBMigrationTool.MappingClasses.Menu;
 using Range = Microsoft.Office.Interop.Excel.Range;
->>>>>>> Stashed changes
 
 namespace CapitalGainDBMigrationTool
 {
     class Program
-<<<<<<< Updated upstream
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-=======
     {        
         static void Main(string[] args) {
 
@@ -126,7 +117,6 @@ namespace CapitalGainDBMigrationTool
                     PrintMenu(__sm);
                 }
             }
->>>>>>> Stashed changes
         }
     }
 }
