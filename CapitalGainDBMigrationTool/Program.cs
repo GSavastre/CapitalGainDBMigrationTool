@@ -1,13 +1,34 @@
 ﻿using System;
+<<<<<<< Updated upstream
+=======
 using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Text.Json;
 using CapitalGainDBMigrationTool.MappingClasses;
+using CapitalGainDBMigrationTool.TableClasses;
+using Microsoft.Office.Core;
+using Microsoft.Office.Interop.Excel;
+using MongoDB.Bson;
+using MongoDB.Bson.IO;
+using Excel = Microsoft.Office.Interop.Excel;
+using Menu = CapitalGainDBMigrationTool.MappingClasses.Menu;
+using Range = Microsoft.Office.Interop.Excel.Range;
+>>>>>>> Stashed changes
 
 namespace CapitalGainDBMigrationTool
 {
     class Program
+<<<<<<< Updated upstream
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Hello World!");
+=======
+    {        
+        static void Main(string[] args) {
+
             #region BATCH CHAIN 
             List<WCAP_JTGTT007> listaMovimentiInput = new List<WCAP_JTGTT007>();
 
@@ -105,6 +126,7 @@ namespace CapitalGainDBMigrationTool
                     PrintMenu(__sm);
                 }
             }
+>>>>>>> Stashed changes
         }
     }
 }
