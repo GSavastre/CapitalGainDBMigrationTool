@@ -43,16 +43,19 @@ namespace CapitalGainDBMigrationTool.MappingClasses
         public DateTime esercizio;
         [BsonElement("D_INS")]
         public DateTime d_ins;
+        [BsonElement("CC")]
+        public List<WCAP_JTITT272> cc = new List<WCAP_JTITT272>();
+        [BsonElement("ADDEBITI")]
+        public WCAP_JTGTT004 addebito;
         [BsonElement("X_INS")]
         public string x_ins;
         [BsonElement("X_AGG")]
         public string x_agg;
-        [BsonElement("CC")]
-        public List<WCAP_JTITT272> cc = new List<WCAP_JTITT272>();
+        
 
         public WCAP_JTITT270(int ist, string ndg, string residente, int pae_uic, int settore, int ramo, string nat_giur,
                             string rap, string des_rap, string regime, string compensa, string qualif, DateTime decor,
-                            string movimenta, DateTime esercizio, DateTime d_ins, List<WCAP_JTITT272> cc,
+                            string movimenta, DateTime esercizio, DateTime d_ins, List<WCAP_JTITT272> cc, WCAP_JTGTT004 addebito = null,
                             string x_ins = "", string x_agg = "") {
             this.ist = ist;
             this.ndg = ndg;
@@ -80,6 +83,7 @@ namespace CapitalGainDBMigrationTool.MappingClasses
                 this.cc = new List<WCAP_JTITT272>();
             }
 
+            this.addebito = addebito;
             this.x_ins = x_ins;
             this.x_agg = x_agg;
             

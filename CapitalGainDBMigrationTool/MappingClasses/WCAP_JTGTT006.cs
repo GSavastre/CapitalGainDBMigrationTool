@@ -94,6 +94,8 @@ namespace CapitalGainDBMigrationTool.MappingClasses
         public float fisc_e;
         [BsonElement("FISC_V")]
         public float fisc_v;
+        [BsonElement("SEGNALAZIONE")]
+        public WCAP_JTGTT009 segn;
         [BsonElement("X_INS")]
         public string x_ins;
         [BsonElement("X_AGG")]
@@ -136,7 +138,7 @@ namespace CapitalGainDBMigrationTool.MappingClasses
                             string proc_prov, string tip_prd, float val_nom, float ctv_e, float ctv_v, float cmb_tra, float imp_nav, string cau,
                             string segno, string oneroso, float pm_e_est, string cau_o, string sca_o, string ope_o, string ope_o_col, float coe_ret,
                             float coe_rip, DateTime med_ope, DateTime contab, float val_nom_p, float ctv_e_p, float ctv_v_p, DateTime med, DateTime carico, float pm_e,
-                            float pm_v, string f_vld, DateTime d_vld, string mtv, string fil_amm, string fil_ope, float fisc_e, float fisc_v,
+                            float pm_v, string f_vld, DateTime d_vld, string mtv, string fil_amm, string fil_ope, float fisc_e, float fisc_v, WCAP_JTGTT009 segn,
                             string x_ins = "", string x_agg = "") {
 
             this.ist = ist;
@@ -181,6 +183,7 @@ namespace CapitalGainDBMigrationTool.MappingClasses
             this.fil_ope = fil_ope;
             this.fisc_e = fisc_e;
             this.fisc_v = fisc_v;
+            this.segn = segn;
             this.x_ins = x_ins;
             this.x_agg = x_agg;
         }

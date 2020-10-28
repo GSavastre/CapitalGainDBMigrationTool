@@ -19,19 +19,17 @@ namespace CapitalGainDBMigrationTool
     class Program
     {        
         static void Main(string[] args) {
-            WCAP_SqlReader.Populate271FromSql();
 
-            #region BATCH CHAIN 
+            #region BATCH CHAIN STEP 1 
             List<WCAP_JTGTT007> listaMovimentiInput = new List<WCAP_JTGTT007>();
 
-            // 1 STEP
-            //load from db 
+            //1 STEP load from db
             //DBCInteraction.Connect();
             //listaMovimentiInput = DBCInteraction.Get_WCAP007();
 
             //load from file
-            //listaMovimentiInput.AddRange(FileReader.ReadTxt());
-            //FileReader.PrintMovementsStatus(listaMovimentiInput);
+            listaMovimentiInput.AddRange(FileReader.ReadTxt());
+            FileReader.PrintMovementsStatus(listaMovimentiInput);
 
             // 2 STEP
 

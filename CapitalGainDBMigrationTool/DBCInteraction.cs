@@ -147,7 +147,9 @@ namespace CapitalGainDBMigrationTool
 
         public static bool Insert_WCAP006s(List<WCAP_JTGTT006> records)
         {
+            var filter = Builders<WCAP_JTGTT006>.Filter.Empty;
             var _006Col = db.GetCollection<WCAP_JTGTT006>("WCAP_JTGTT006");
+            var result = _006Col.DeleteMany(filter);
 
             try
             {
@@ -225,7 +227,9 @@ namespace CapitalGainDBMigrationTool
 
         public static bool Insert_WCAP270s(List<WCAP_JTITT270> records)
         {
+            var filter = Builders<WCAP_JTITT270>.Filter.Empty;
             var _270Col = db.GetCollection<WCAP_JTITT270>("WCAP_JTITT270");
+            var result =_270Col.DeleteMany(filter);
 
             try
             {

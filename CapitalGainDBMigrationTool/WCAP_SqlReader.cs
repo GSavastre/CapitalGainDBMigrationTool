@@ -356,9 +356,10 @@ namespace CapitalGainDBMigrationTool
                                                                         ClearStringBasic(subRecord[FIL_OPE_06]),
                                                                         ExtractFloatValue(subRecord[FISC_E_06]),
                                                                         ExtractFloatValue(subRecord[FISC_V_06]),
+                                                                        null,
                                                                         ClearStringBasic(subRecord[X_INS_06]),
                                                                         ClearStringBasic(subRecord[X_AGG_06])
-                                                                        );
+                                                                        ); ;
 
                             records_006.Add(record_006);
                         }
@@ -520,6 +521,7 @@ namespace CapitalGainDBMigrationTool
                                                                         ExtractDateValue(subRecord[ESERCIZIO_270]),
                                                                         ExtractDateValue(subRecord[D_INS_270]),
                                                                         null, //lista di cc aggiunta durante il passaggio a mongo
+                                                                        null, //addebito (004) aggiunto durante il passaggio a mongo
                                                                         ClearStringBasic(subRecord[X_INS_270]),
                                                                         ClearStringBasic(subRecord[X_AGG_270])
                                                                         ); ;

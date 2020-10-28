@@ -1,88 +1,97 @@
-﻿//using CapitalGainDBMigrationTool.MappingClasses;
-//using Microsoft.Office.Core;
-//using Microsoft.Office.Interop.Excel;
-//using MongoDB.Bson;
-//using MongoDB.Driver.Core.Events;
-//using System;
-//using System.Collections.Generic;
-//using System.ComponentModel;
-//using System.Configuration;
-//using System.IO;
-//using System.Runtime.InteropServices;
-//using System.Text;
+﻿using CapitalGainDBMigrationTool.MappingClasses;
+using Microsoft.Office.Interop.Excel;
+using MongoDB.Bson;
+using MongoDB.Driver.Core.Events;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
 
-//namespace CapitalGainDBMigrationTool
-//{
-//    public static class FileReader
-//    {
-//        static string filePath = @"C:\Users\cosmi\Desktop\movimGain9.txt";
-        
-//        static int[,] len_off = new int[30,2];
-//        static Dictionary<int, string> values = new Dictionary<int, string>();
-        
-//        public static List<WCAP_JTGTT007> ReadTxt() {
-//            List<WCAP_JTGTT007> listaMovimentiInput = new List<WCAP_JTGTT007>();
+namespace CapitalGainDBMigrationTool
+{
+    public static class FileReader
+    {
+        static string filePath = @"C:\Users\cosmi\Desktop\movimGain9.txt";
 
-//            GetExcelLenghtAndOffsetData();
+        static int[,] len_off = new int[30, 2];
+        static Dictionary<int, string> values = new Dictionary<int, string>();
 
-//            using (StreamReader reader = new StreamReader(filePath))
-//            {
-//                string s;
-//                while ((s = reader.ReadLine()) != null) {
-//                    char[] record = new char[391];
-//                    record = s.ToCharArray();
+        public static List<WCAP_JTGTT007> ReadTxt()
+        {
+            List<WCAP_JTGTT007> listaMovimentiInput = new List<WCAP_JTGTT007>();
 
-//                    for (int i = 0; i < 30; i++) {
-//                        int len = len_off[i, 0];
-//                        int off = len_off[i, 1] -1;
+            GetExcelLenghtAndOffsetData();
 
-//                        char[] segment = new char[len];
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string s;
+                while ((s = reader.ReadLine()) != null)
+                {
+                    char[] record = new char[391];
+                    record = s.ToCharArray();
 
-//                        for (int j = 0; j < len; j++) {
-//                            try {
-//                                segment[j] = record[off + j];
-//                            }
-//                            catch {
-//                                segment[j] = ' ';
-//                            }
-//                        }
-//                        values.Add(i, new string(segment));
-//                    }
+                    for (int i = 0; i < 30; i++)
+                    {
+                        int len = len_off[i, 0];
+                        int off = len_off[i, 1] - 1;
 
-//                    listaMovimentiInput.Add(new WCAP_JTGTT007(values));
-//                    values.Clear();
-//                }
-//            }
+                        char[] segment = new char[len];
 
-//            return listaMovimentiInput;
-//        }
+                        for (int j = 0; j < len; j++)
+                        {
+                            try
+                            {
+                                segment[j] = record[off + j];
+                            }
+                            catch
+                            {
+                                segment[j] = ' ';
+                            }
+                        }
+                        values.Add(i, new string(segment));
+                    }
 
-//        static void GetExcelLenghtAndOffsetData() {
-//            int start_col = 3;
-//            int start_row = 3;
+                    listaMovimentiInput.Add(new WCAP_JTGTT007(values));
+                    values.Clear();
+                }
+            }
 
-//            int sheet = 4;
-//            _Application excel = new Application();
-//            Workbook wb = excel.Workbooks.Open(ConfigurationManager.AppSettings["D"]);
-//            Worksheet ws = (Worksheet)wb.Worksheets[sheet];
+            return listaMovimentiInput;
+        }
 
-//            for (int r = start_row; r < 33; r++)  {
-//                //Console.WriteLine( $"{((Microsoft.Office.Interop.Excel.Range)ws.Cells[r, start_col]).Value2} : " +
-//                //               $"{((Microsoft.Office.Interop.Excel.Range)ws.Cells[r, start_col+1]).Value2}");
+        static void GetExcelLenghtAndOffsetData()
+        {
+            int start_col = 3;
+            int start_row = 3;
 
-//                len_off[r - 3, 0] = Int32.Parse(((Microsoft.Office.Interop.Excel.Range)ws.Cells[r, start_col]).Value2.ToString());
-//                len_off[r - 3, 1] = Int32.Parse(((Microsoft.Office.Interop.Excel.Range)ws.Cells[r, start_col+1]).Value2.ToString());
+            int sheet = 4;
+            _Application excel = new Application();
+            Workbook wb = excel.Workbooks.Open(ConfigurationManager.AppSettings["D"]);
+            Worksheet ws = (Worksheet)wb.Worksheets[sheet];
 
-//            }
-//        }
+            for (int r = start_row; r < 33; r++)
+            {
+                //Console.WriteLine( $"{((Microsoft.Office.Interop.Excel.Range)ws.Cells[r, start_col]).Value2} : " +
+                //               $"{((Microsoft.Office.Interop.Excel.Range)ws.Cells[r, start_col+1]).Value2}");
 
-//        public static void PrintMovementsStatus(List<WCAP_JTGTT007> listaMovimentiInput) {
-//            foreach (WCAP_JTGTT007 record in listaMovimentiInput) {
-//                Console.WriteLine($"{record.proc_prov} - {record.stato}");
-//            }
-//        }
+                len_off[r - 3, 0] = Int32.Parse(((Microsoft.Office.Interop.Excel.Range)ws.Cells[r, start_col]).Value2.ToString());
+                len_off[r - 3, 1] = Int32.Parse(((Microsoft.Office.Interop.Excel.Range)ws.Cells[r, start_col + 1]).Value2.ToString());
 
-//        //TODO metodo per controlli avanzati
+            }
+        }
 
-//    }
-//}
+        public static void PrintMovementsStatus(List<WCAP_JTGTT007> listaMovimentiInput)
+        {
+            foreach (WCAP_JTGTT007 record in listaMovimentiInput)
+            {
+                Console.WriteLine($"{record.proc_prov} - {record.stato}");
+            }
+        }
+
+        //TODO metodo per controlli avanzati
+
+    }
+}

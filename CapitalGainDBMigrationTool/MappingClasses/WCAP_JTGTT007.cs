@@ -82,6 +82,9 @@ namespace CapitalGainDBMigrationTool.MappingClasses
         [BsonElement("X_AGG")]
         public string x_agg;
 
+        /// <summary>
+        /// Costruttore per l'estrapolazione dell'oggetto da file SQL
+        /// </summary>
         public WCAP_JTGTT007(int ist, string proc_prov, string ope_o, string stato, int ordinamento, string rap, string prd, DateTime gain,
                             string regime, int srap, string ndg, string tip_prd, float val_nom, float ctv_e, float ctv_v, float cmb_tra,
                             float imp_nav, string cau, string segno, string oneroso, float pm_e_est, string storno, string cau_o, string sca_o,
@@ -99,7 +102,7 @@ namespace CapitalGainDBMigrationTool.MappingClasses
             this.regime = regime;
             this.srap = srap;
             this.ndg = ndg;
-            this.tip_prd = prd;
+            this.tip_prd = tip_prd;
             this.val_nom = val_nom;
             this.ctv_e = ctv_e;
             this.ctv_v = ctv_v;
@@ -112,18 +115,26 @@ namespace CapitalGainDBMigrationTool.MappingClasses
             this.storno = storno;
             this.cau_o = cau_o;
             this.sca_o = sca_o;
+            this.ope_o_col = ope_o_col;
+            this.coe_ret = coe_ret;
+            this.coe_rip = coe_rip;
+            this.med_ope = med_ope;
+            this.contab = contab;
+            this.FOR = FOR;
+            this.err = err;
             this.fil_amm = fil_amm;
             this.fil_ope = fil_ope;
             this.x_ins = x_ins;
             this.x_agg = x_agg;
         }
 
-
-        /*
+        /// <summary>
+        /// Costruttore per l'estrapolazione dell'oggetto da file TXT (flusso di input)
+        /// </summary>
         public WCAP_JTGTT007(Dictionary<int, string> values) {
             if (values.Count == 30)
             {
-                istituto = values[0];
+                ist = Int32.Parse(values[0]);
                 proc_prov = values[1];
                 ope_o = values[2];
                 rap = values[3];
@@ -133,29 +144,29 @@ namespace CapitalGainDBMigrationTool.MappingClasses
                 srap = Int32.Parse(values[7]);
                 ndg = values[8];
                 tip_prd = values[9];
-                val_nom = Convert.ToDouble(values[10]);
-                ctv_e = Convert.ToDouble(values[11]);
-                ctv_v = Convert.ToDouble(values[12]);
-                cmb_tra = Convert.ToDouble(values[13]);
-                imp_nav = Convert.ToDouble(values[14]);
+                val_nom = float.Parse(values[10]);
+                ctv_e = float.Parse(values[11]);
+                ctv_v = float.Parse(values[12]);
+                cmb_tra = float.Parse(values[13]);
+                imp_nav = float.Parse(values[14]);
                 cau = values[15];
-                segno = values[16][0];
+                segno = values[16];
                 oneroso = values[17];
-                pm_e_est = Convert.ToDouble(values[18]);
-                storno = values[19][0];
+                pm_e_est = float.Parse(values[18]);
+                storno = values[19];
                 cau_o = values[20];
                 sca_o = values[21];
                 ope_o_col = values[22];
-                coe_ret = Convert.ToDouble(values[23]);
-                coe_rip = Convert.ToDouble(values[24]);
+                coe_ret = float.Parse(values[23]);
+                coe_rip = float.Parse(values[24]);
                 med_ope = StringToDateTime(values[25]);
                 contab = StringToDateTime(values[26]);
                 FOR = values[27];
                 fil_amm = values[28];
                 fil_ope = values[29];
                 
-                ins = DateTime.Now;
-                agg = DateTime.Now;
+                x_ins = "";
+                x_agg = "";
             }
         }
 
@@ -181,8 +192,7 @@ namespace CapitalGainDBMigrationTool.MappingClasses
             }
 
             return new DateTime(year, month, day);
-        }
-        */
+        }        
 
     }
 }

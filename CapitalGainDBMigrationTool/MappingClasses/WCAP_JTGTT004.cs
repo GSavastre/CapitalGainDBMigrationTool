@@ -30,7 +30,7 @@ namespace CapitalGainDBMigrationTool.MappingClasses
         [BsonElement("INSERIM")]
         public DateTime inserim;
         [BsonElement("IMPOSTA")]
-        public double imposta;
+        public float imposta;
         [BsonElement("F_SCARICO")]
         public string f_scarico;
         [BsonElement("D_SCARICO")]
@@ -43,5 +43,26 @@ namespace CapitalGainDBMigrationTool.MappingClasses
         public string x_ins;
         [BsonElement("X_AGG")]
         public string x_agg;
+
+        public WCAP_JTGTT004(int ist, string sogg_fisc, DateTime gain, int prog, string tipo_sogg, string cc_reg, string cau, DateTime storno,
+                            DateTime inserim, float imposta, string f_scarico, DateTime d_scarico, string fil_amm, string fil_ope,
+                            string x_ins = "", string x_agg = "") {
+            this.ist = ist;
+            this.sogg_fisc = sogg_fisc;
+            this.gain = gain;
+            this.prog = prog;
+            this.tipo_sogg = tipo_sogg;
+            this.cc_reg = cc_reg;
+            this.cau = cau;
+            this.storno = storno;
+            this.inserim = inserim;
+            this.imposta = imposta;
+            this.f_scarico = f_scarico;
+            this.d_scarico = d_scarico;
+            this.fil_amm = fil_amm;
+            this.fil_ope = fil_ope;
+            this.x_ins = x_ins;
+            this.x_agg = x_agg;
+        }
     }
 }
