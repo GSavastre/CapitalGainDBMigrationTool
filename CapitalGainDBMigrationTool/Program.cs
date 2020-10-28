@@ -5,20 +5,21 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using CapitalGainDBMigrationTool.MappingClasses;
-using CapitalGainDBMigrationTool.TableClasses;
-using Microsoft.Office.Core;
-using Microsoft.Office.Interop.Excel;
-using MongoDB.Bson;
-using MongoDB.Bson.IO;
-using Excel = Microsoft.Office.Interop.Excel;
-using Menu = CapitalGainDBMigrationTool.MappingClasses.Menu;
-using Range = Microsoft.Office.Interop.Excel.Range;
+//using CapitalGainDBMigrationTool.TableClasses;
+//using Microsoft.Office.Core;
+//using Microsoft.Office.Interop.Excel;
+//using MongoDB.Bson;
+//using MongoDB.Bson.IO;
+//using Excel = Microsoft.Office.Interop.Excel;
+//using Menu = CapitalGainDBMigrationTool.MappingClasses.Menu;
+//using Range = Microsoft.Office.Interop.Excel.Range;
 
 namespace CapitalGainDBMigrationTool
 {
     class Program
     {        
         static void Main(string[] args) {
+            WCAP_SqlReader.Populate271FromSql();
 
             #region BATCH CHAIN 
             List<WCAP_JTGTT007> listaMovimentiInput = new List<WCAP_JTGTT007>();
@@ -29,8 +30,8 @@ namespace CapitalGainDBMigrationTool
             //listaMovimentiInput = DBCInteraction.Get_WCAP007();
 
             //load from file
-            listaMovimentiInput.AddRange(FileReader.ReadTxt());
-            FileReader.PrintMovementsStatus(listaMovimentiInput);
+            //listaMovimentiInput.AddRange(FileReader.ReadTxt());
+            //FileReader.PrintMovementsStatus(listaMovimentiInput);
 
             // 2 STEP
 

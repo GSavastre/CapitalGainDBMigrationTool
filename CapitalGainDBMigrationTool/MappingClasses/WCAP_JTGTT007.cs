@@ -12,11 +12,15 @@ namespace CapitalGainDBMigrationTool.MappingClasses
         [BsonId]
         public ObjectId id;
         [BsonElement("IST")]
-        public string istituto;
+        public int ist;
         [BsonElement("PROC_PROV")]
         public string proc_prov;
         [BsonElement("OPE_O")]
         public string ope_o;
+        [BsonElement("C_STATO")]
+        public string stato;
+        [BsonElement("ORDINAMENTO")]
+        public int ordinamento;
         [BsonElement("RAP")]
         public string rap;
         [BsonElement("PRD")]
@@ -32,25 +36,25 @@ namespace CapitalGainDBMigrationTool.MappingClasses
         [BsonElement("TIP_PRD")]
         public string tip_prd;
         [BsonElement("VAL_NOM")]
-        public double val_nom;
+        public float val_nom;
         [BsonElement("CTV_E")]
-        public double ctv_e;
+        public float ctv_e;
         [BsonElement("CTV_V")]
-        public double ctv_v;
+        public float ctv_v;
         [BsonElement("CMB_TRA")]
-        public double cmb_tra;
+        public float cmb_tra;
         [BsonElement("IMP_NAV")]
-        public double imp_nav;
+        public float imp_nav;
         [BsonElement("CAU")]
         public string cau;
         [BsonElement("SEGNO")]
-        public char segno;
+        public string segno;
         [BsonElement("ONERSO")]
         public string oneroso;
         [BsonElement("PM_E_EST")]
-        public double pm_e_est;
+        public float pm_e_est;
         [BsonElement("STORNO")]
-        public char storno;
+        public string storno;
         [BsonElement("CAU_O")]
         public string cau_o;
         [BsonElement("SCA_O")]
@@ -58,31 +62,64 @@ namespace CapitalGainDBMigrationTool.MappingClasses
         [BsonElement("OPE_O_COL")]
         public string ope_o_col;
         [BsonElement("COE_RET")]
-        public double coe_ret;
+        public float coe_ret;
         [BsonElement("COE_RIP")]
-        public double coe_rip;
+        public float coe_rip;
         [BsonElement("MED_OPE")]
         public DateTime med_ope;
         [BsonElement("CONTAB")]
         public DateTime contab;
         [BsonElement("FOR")]
         public string FOR;
+        [BsonElement("ERR")]
+        public string err;
         [BsonElement("FIL_AMM")]
         public string fil_amm;
         [BsonElement("FIL_OPE")]
         public string fil_ope;
-
-        [BsonElement("C_STATO")]
-        public string stato;
-        [BsonElement("ORDINAMENTO")]
-        public string ordinamento;
-        [BsonElement("ERR")]
-        public string err;
         [BsonElement("X_INS")]
-        public DateTime ins;
+        public string x_ins;
         [BsonElement("X_AGG")]
-        public DateTime agg;
+        public string x_agg;
 
+        public WCAP_JTGTT007(int ist, string proc_prov, string ope_o, string stato, int ordinamento, string rap, string prd, DateTime gain,
+                            string regime, int srap, string ndg, string tip_prd, float val_nom, float ctv_e, float ctv_v, float cmb_tra,
+                            float imp_nav, string cau, string segno, string oneroso, float pm_e_est, string storno, string cau_o, string sca_o,
+                            string ope_o_col, float coe_ret, float coe_rip, DateTime med_ope, DateTime contab, string FOR, string err,
+                            string fil_amm, string fil_ope, string x_ins = "", string x_agg = "") {
+
+            this.ist = ist;
+            this.proc_prov = proc_prov;
+            this.ope_o = ope_o;
+            this.stato = stato;
+            this.ordinamento = ordinamento;
+            this.rap = rap;
+            this.prd = prd;
+            this.gain = gain;
+            this.regime = regime;
+            this.srap = srap;
+            this.ndg = ndg;
+            this.tip_prd = prd;
+            this.val_nom = val_nom;
+            this.ctv_e = ctv_e;
+            this.ctv_v = ctv_v;
+            this.cmb_tra = cmb_tra;
+            this.imp_nav = imp_nav;
+            this.cau = cau;
+            this.segno = segno;
+            this.oneroso = oneroso;
+            this.pm_e_est = pm_e_est;
+            this.storno = storno;
+            this.cau_o = cau_o;
+            this.sca_o = sca_o;
+            this.fil_amm = fil_amm;
+            this.fil_ope = fil_ope;
+            this.x_ins = x_ins;
+            this.x_agg = x_agg;
+        }
+
+
+        /*
         public WCAP_JTGTT007(Dictionary<int, string> values) {
             if (values.Count == 30)
             {
@@ -145,5 +182,7 @@ namespace CapitalGainDBMigrationTool.MappingClasses
 
             return new DateTime(year, month, day);
         }
+        */
+
     }
 }

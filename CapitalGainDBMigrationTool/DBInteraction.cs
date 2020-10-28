@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using CapitalGainDBMigrationTool.MappingClasses;
-using CapitalGainDBMigrationTool.TableClasses;
+using Microsoft.IdentityModel.Protocols;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
@@ -164,41 +164,41 @@ namespace CapitalGainDBMigrationTool
         /// </summary>
         /// <param name="_table"></param>
         /// <returns></returns>
-        public static bool CreateCollection(Table _table) {
-            try {
-                db.CreateCollection(_table.name);
-                Console.WriteLine("Collection creata : " + _table);
-            }
-            catch (Exception _e) {
-                Console.WriteLine("Impossible creare collection ..." + _e.Message);
-                return false;
-            }
+        //public static bool CreateCollection(Table _table) {
+        //    try {
+        //        db.CreateCollection(_table.name);
+        //        Console.WriteLine("Collection creata : " + _table);
+        //    }
+        //    catch (Exception _e) {
+        //        Console.WriteLine("Impossible creare collection ..." + _e.Message);
+        //        return false;
+        //    }
             
-            return true;
-        }
+        //    return true;
+        //}
 
-        /// <summary>
-        /// Creates the collections with the given names
-        /// </summary>
-        /// <param name="_tables"></param>
-        /// <returns></returns>
-        public static bool CreateCollections(List<Table> _tables)
-        {
-            try
-            {
-                foreach (Table _t in _tables) {
-                    db.CreateCollection(_t.id);
-                    Console.WriteLine("Collection creata : " + _t.id);
-                }
-            }
-            catch (Exception _e)
-            {
-                Console.WriteLine("Impossible creare collection ..." + _e.Message);
-                return false;
-            }
+        ///// <summary>
+        ///// Creates the collections with the given names
+        ///// </summary>
+        ///// <param name="_tables"></param>
+        ///// <returns></returns>
+        //public static bool CreateCollections(List<Table> _tables)
+        //{
+        //    try
+        //    {
+        //        foreach (Table _t in _tables) {
+        //            db.CreateCollection(_t.id);
+        //            Console.WriteLine("Collection creata : " + _t.id);
+        //        }
+        //    }
+        //    catch (Exception _e)
+        //    {
+        //        Console.WriteLine("Impossible creare collection ..." + _e.Message);
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         /// <summary>
         /// Inserts the specified record in the specified collection

@@ -25,5 +25,21 @@ namespace CapitalGainDBMigrationTool.MappingClasses
         public string x_ins;
         [BsonElement("X_AGG")]
         public string x_agg;
+
+        public WCAP_JTITT272() { }
+
+        public WCAP_JTITT272(int ist, string ndg, string rap, string des_rap, DateTime decor,
+                            string tipo_reg, string cc_reg, string x_ins, string x_agg) {
+
+            this.ist = ist;
+            this.ndg = ndg;
+            this.rap = rap;
+            this.des_rap = des_rap;
+            this.decor = decor;
+            this.tipo_reg = tipo_reg;
+            this.cc_reg = cc_reg;
+            this.x_ins = x_ins;
+            this.x_agg = x_agg;
+        }
     }
 }
